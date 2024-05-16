@@ -9,4 +9,6 @@ public class Course {
     private Student[] registeredStudents;
     private double[] finalScores;
     private static int nextId;
+
+
 }
