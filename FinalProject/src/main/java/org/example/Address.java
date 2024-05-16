@@ -17,9 +17,34 @@ public class Address {
     private String postalCode;
     private String country;
 
+
+    /**
+     * checks if a postcode is valid or not, the length of a postal code can either be 6 or 7
+     * @param postalCode the input String
+     * @return true or false
+     */
+    public static boolean isPostalCodeValid(String postalCode){
+        return postalCode.length() == 6 || postalCode.length() == 7;
+    }
+
+    public Address(int streetNo, String street, String city, String province, String postalCode, String country) {
+        if (isPostalCodeValid(postalCode)) {
+            this.streetNo = streetNo;
+            this.street = street;
+            this.city = city;
+            this.province = province;
+            this.country = country;
+        } else {
+            this.streetNo = 0; // ask about null int value
+            this.street = null;
+            this.city = null;
+            this.province = null;
+            this.country = null;
+        }
+    }
+
+
     //TODO:
-    // 1. `static boolean isPostalCodeValid(String postalCode)`
-    // checks if a postcode is valid or not.
+    // static boolean isPostalCodeValid(String postalCode)
     // The length of a postal code can either be `6` or `7`,
-    // 2. all argument constructor
 }
