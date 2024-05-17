@@ -15,6 +15,17 @@ public class Department {
     private static int nextId;
 
 
+    public Department (String departmentId, String departmentName){
+        if (!validateDepartmentName(departmentName)) {
+            this.departmentId = null;
+            this.departmentName = null;
+        }
+        else {
+            this.departmentId = departmentId;
+            this.departmentName = departmentName;
+        }
+    }
+
     public static boolean validateDepartmentName(String departmentName) {
         for(int i = 0; i < departmentName.length(); i++){
             char character = departmentName.charAt(i);
@@ -25,14 +36,4 @@ public class Department {
         }
         return true;
     }
-
-    //TODO:
-    // static boolean validateDepartmentName(String departmentName)
-    // checks if a department name is valid or not,
-    // a department name should only contain letters or space
-
-    //TODO:
-    // Constructor
-    // if the departmentName is invalid, create the object with everything as null
-
 }
