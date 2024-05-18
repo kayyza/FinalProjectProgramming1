@@ -23,8 +23,46 @@ public class Address {
      * @param postalCode the input String
      * @return true or false
      */
-    public static boolean isPostalCodeValid(String postalCode){
-        return postalCode.length() == 6 || postalCode.length() == 7;
+    public static boolean isPostalCodeValid(String postalCode) {
+
+        if (postalCode == null || postalCode.isEmpty()) {
+            return false;
+        }
+        if (postalCode.length() < 6 || postalCode.length() > 7) {
+            return false;
+        }
+
+        if (postalCode.length() == 6) {
+            for(int i = 0; i < postalCode.length(); i++) {
+                switch (i) {
+                    case 0, 2, 4:
+                        if(!Character.isLetter(postalCode.charAt(i))) {
+                           return false;
+                        }
+                        break;
+                    case 1, 3, 5:
+                        if (!Character.isDigit(postalCode.charAt(i))) {
+                            return false;
+                        }
+                        break;
+                }
+            }
+        } else {
+            for (int i = 0; i < postalCode.length(); i++) {
+                switch (i) {
+                    case 0, 2, 5:
+                        if (!Character.isLetter(postalCode.charAt(i))) {
+                            return false;
+                        }
+                        break;
+                    case 1, 4, 6:
+                        if (!Character.isDigit(postalCode.charAt(i))) {
+                            return false;
+                        }
+                }
+            }
+        }
+        return true;
     }
 
     public Address(int streetNo, String street, String city, String province, String postalCode, String country) {
