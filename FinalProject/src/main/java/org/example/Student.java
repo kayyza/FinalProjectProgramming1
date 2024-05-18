@@ -66,6 +66,25 @@ public class Student {
         return 'S' + zeroes + num;
     }
 
+    /**
+     * a simplified version of toString
+     * @return a simplified string
+     */
+    public String toSimplifiedString() {
+        return studentId + " " + studentName + " " + department.getDepartmentName();
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId='" + studentId + '\'' +
+                ", studentName='" + studentName + '\'' +
+                ", gender=" + gender +
+                ", address=" + address +
+                ", department=" + department +
+                ", registeredCourses=" + registeredCourses +
+                '}';
+    }
 
     //TODO:
     // If the course is already registered, directly returns false
@@ -75,9 +94,7 @@ public class Student {
     // If the course is not registered yet, directly returns false
 
     //TODO:
-    // toSimplifiedString
-    // converts a student to a simple string with only the studentId,
-    // the studentName, and departmentName. This method is called in Course toString().
+    // This method is called in Course toString().
 
     //TODO:
     // toString

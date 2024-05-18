@@ -4,6 +4,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+
 @EqualsAndHashCode
 @Getter
 @Setter
@@ -13,7 +15,7 @@ public class Course {
     private double credits;
     private Department department;
     private Assignment[] assignments;
-    private Student[] registeredStudents;
+    private ArrayList<Student> registeredStudents;
     private double[] finalScores;
     private static int nextId;
 
@@ -26,6 +28,12 @@ public class Course {
     // adds a student to the student list of the course,
     // also add a new null element to each assignment of this course,
     // and add a new null element for the finalScores.
+
+    public boolean registeredStudents(Student student){
+        registeredStudents.add(student);
+
+        return true;
+    }
 
     //TODO:
     // int[] calcStudentsAverage()
