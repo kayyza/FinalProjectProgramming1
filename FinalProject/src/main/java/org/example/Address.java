@@ -80,9 +80,4 @@ public class Address {
             this.country = null;
         }
     }
-
-
-    //TODO:
-    // static boolean isPostalCodeValid(String postalCode)
-    // The length of a postal code can either be `6` or `7`,
 }
