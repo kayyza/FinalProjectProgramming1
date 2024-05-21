@@ -1,26 +1,56 @@
 package org.example;
 
-import javax.swing.*;
-import java.util.ArrayList;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+@AllArgsConstructor
+@EqualsAndHashCode
+@Getter
+@Setter
 public class Assignment {
     private String assignmentId;
     private String assignmentName;
     private double weight;
     private int maxScore;
     private double assignmentAverage;
-    private int[] scores;
+    private ArrayList<Integer> scores;
     private static int nextId;
 
-    //TODO:
-    // void calcAssignmentAvg()
-    // calculates the average score for one assignment
+    /**
+     * calculates the average score for one assignment
+     */
+    public void calcAssignmentAvg() {
 
-    //TODO:
-    // void generateRandomScore()
-    // generates random scores for all students in an assignment,
-    // the scores are generated with the following rule:
-    // Firstly generate a random number in range [0, 10]... see .md file
+        double sum = 0;
+        for (double num : scores) {
+            sum += num;
+        }
+
+        double average = sum / scores.size();
+        System.out.println(average);
+    }
+
+    /**
+     * generates random scores for all students in an assignment
+     */
+    public void generateRandomScore() {
+        Random rand = new Random();
+        int randomNum = rand.nextInt(0, 11);
+
+        switch (randomNum) {
+            case 0 -> rand.nextInt(0, 60);
+            case 1, 2 -> rand.nextInt(60, 70);
+            case 3, 4 ->  rand.nextInt(70, 80);
+            case 5, 6, 7, 8 -> rand.nextInt(80, 90);
+            case 9, 10 -> rand.nextInt(90, 101);
+        }
+    }
 
     //TODO:
     // toString
