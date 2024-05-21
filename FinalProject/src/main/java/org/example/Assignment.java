@@ -51,6 +51,15 @@ public class Assignment {
             case 9, 10 -> rand.nextInt(90, 101);
         }
     }
+    @Override
+    public String toString() {
+        return "Assignment{" +
+                "assignmentId='" + assignmentId + '\'' +
+                ", assignmentName='" + assignmentName + '\'' +
+                ", weight=" + weight +
+                ", maxScore=" + maxScore +
+                '}';
+    }
 
     //TODO:
     // toString
