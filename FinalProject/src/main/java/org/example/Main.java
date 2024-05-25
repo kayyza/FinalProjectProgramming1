@@ -1,6 +1,8 @@
 package org.example;
 
 
+import util.Util;
+
 import java.util.Arrays;
 
 public class Main {
@@ -10,9 +12,13 @@ public class Main {
         Student stu = new Student("John Doe", Gender.MALE, a, d);
         Student stu1 = new Student("Jessica Day", Gender.FEMALE, a, d);
         Course c = new Course("C-D01-01");
+        System.out.println(c.getRegisteredStudents());
+        c.addAssignment("name", .4, 100);
+        c.addAssignment("name", .6, 100);
         stu.registerCourse(c);
         stu1.registerCourse(c);
-        System.out.println(c.getRegisteredStudents());
-        System.out.println(Arrays.toString(c.calcStudentsAverage()));
+        c.generateScores();
+        System.out.println(c.getFinalScores());
+        System.out.println(Util.toTitleCase("i am testing my string"));
     }
 }

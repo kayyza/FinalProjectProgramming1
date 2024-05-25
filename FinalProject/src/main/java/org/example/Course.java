@@ -4,7 +4,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 @EqualsAndHashCode
 @Getter
@@ -49,34 +52,61 @@ public class Course {
      */
    public boolean registerStudents(Student student){
        registeredStudents.add(student);
-
-//       registeredStudents.add(student);
-//       student.getRegisteredCourses().add(this);
-//       System.out.println(registeredStudents);
-//       finalScores.add(null);
-//       for(Assignment assignment : assignments){
-//           assignment.getScores().add(null);
-//       }
+       for(Assignment assignment : assignments){
+           assignment.getScores().add(null);
+       }
+       finalScores.add(null);
        return true;
    }
 
+    /**
+     * calculates the weighted average score of a student
+     * @return an array with the scores of each student
+     */
    public int[] calcStudentsAverage() {
        int[] scores = new int[registeredStudents.size()];
        for(int i = 0; i < scores.length; i++){
            double total = 0;
            for(Assignment assignment : assignments){
-               total += assignment.getScores().get(i) * assignment.getWeight();
+               total += (double) assignment.getScores().get(i) / assignment.getMaxScore() * assignment.getWeight();
            }
-           scores[i] = (int)total * 100;
+           scores[i] = (int)(total * 100);
        }
        return scores;
    }
 
+    /**
+     * adds a new assignment to the course
+     * @param assignmentName given assignment name
+     * @param weight assignment weight
+     * @param maxScore max score you can get on the assignment
+     * @return true or false
+     */
    public boolean addAssignment(String assignmentName, double weight, int maxScore) {
        Assignment assignment = new Assignment(assignmentName, weight, maxScore);
        assignments.add(assignment);
        return true;
    }
+
+    /**
+     * generates random scores for each assignment and student,
+     * and calculates the final score for each student
+     */
+    public void generateScores(){
+        Random rand = new Random();
+        for(Assignment assignment : assignments){
+            for(int i = 0; i < assignment.getScores().size(); i++){
+                assignment.getScores().set(i, rand.nextInt(0, assignment.getMaxScore()));
+            }
+        }
+        for(int i = 0; i < finalScores.size(); i++){
+            double total = 0;
+            for(Assignment assignment : assignments){
+                total += (double) assignment.getScores().get(i) / assignment.getMaxScore() * assignment.getWeight();
+            }
+            finalScores.set(i, total * 100);
+        }
+    }
 
     /**
      * a simplified version of toString
@@ -88,28 +118,17 @@ public class Course {
 
     @Override
     public String toString() {
+        ArrayList<String> students = new ArrayList<>();
+        for(Student registeredStudent : registeredStudents){
+            students.add(registeredStudent.toSimplifiedString() + ", ");
+        }
         return "Course{" +
                 "courseId='" + courseId + '\'' +
                 ", courseName='" + courseName + '\'' +
                 ", credits=" + credits +
                 ", department=" + department +
                 ", assignments=" + assignments +
-                ", registeredStudents=" + registeredStudents +
+                ", registeredStudents=" + students +
                 '}';
     }
-
-    //TODO:
-    // int[] calcStudentsAverage()
-    // calculates the weighted average score of a student.
-
-    //TODO:
-    // void generateScores()
-    // generates random scores for each assignment and student,
-    // and calculates the final score for each student.
-
-    //TODO:
-    // void displayScores()
-    // displays the scores of a course in a table,
-    // with the assignment averages and student weighted average
-
 }

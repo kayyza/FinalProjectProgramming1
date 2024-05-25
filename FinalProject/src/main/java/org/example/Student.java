@@ -24,8 +24,12 @@ public class Student {
      * @return true or false
      */
     public boolean registerCourse(Course course) {
+        if(registeredCourses.contains(course)){
+            return false;
+        }
+        registeredCourses.add(course);
         course.registerStudents(this);
-        return true;                                // appends null for scores of each assignment of course
+        return true;
     }
 
     /**

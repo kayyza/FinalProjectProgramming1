@@ -23,6 +23,10 @@ public class Assignment {
     private static int nextId = 1;
 
     public Assignment(String assignmentName, double weight, int maxScore) {
+        this.assignmentName = assignmentName;
+        this.weight = weight;
+        this.maxScore = maxScore;
+        this.scores = new ArrayList<>();
     }
 
     /**
