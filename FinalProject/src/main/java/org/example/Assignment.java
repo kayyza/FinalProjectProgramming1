@@ -33,12 +33,10 @@ public class Assignment {
      * calculates the average score for one assignment
      */
     public void calcAssignmentAvg() {
-
         double sum = 0;
         for (double num : scores) {
             sum += num;
         }
-
         double average = sum / scores.size();
         System.out.println(average);
     }
@@ -58,6 +56,7 @@ public class Assignment {
             case 9, 10 -> rand.nextInt(90, 101);
         }
     }
+
     @Override
     public String toString() {
         return "Assignment{" +

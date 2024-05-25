@@ -1,6 +1,7 @@
 package util;
 
 public class Util {
+
     /**
      * converts each word in a string to title case
      * @param strIn input String

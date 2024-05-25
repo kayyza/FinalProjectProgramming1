@@ -17,7 +17,6 @@ public class Address {
     private String postalCode;
     private String country;
 
-
     /**
      * checks if a postcode is valid or not, the length of a postal code can either be 6 or 7
      * @param postalCode the input String
