@@ -14,26 +14,43 @@ public class Course {
     private String courseName;
     private double credits;
     private Department department;
-    private Assignment[] assignments;
+    private ArrayList<Assignment> assignments;
     private ArrayList<Student> registeredStudents;
-    private double[] finalScores;
-    private static int nextId;
+    private ArrayList<Double> finalScores;
+    private static int nextId = 1;
 
-    //TODO:
-    // boolean isAssignmentWeightValid()
-    // checks if the sum of weights of all assignments of that course equals to 1 (100%)
-
-    //TODO:
-    // boolean registerStudent(Student student)
-    // adds a student to the student list of the course,
-    // also add a new null element to each assignment of this course,
-    // and add a new null element for the finalScores.
-
-    public boolean registeredStudents(Student student){
-        registeredStudents.add(student);
-
-        return true;
+    /**
+     * checks if the sum of weights of all assignments
+     * of that course equals to 1
+     * @return true or false
+     */
+    public boolean isAssignmentWeightValid() {
+        double sum = 0;
+        for (Assignment assignment : assignments) {
+             sum += assignment.getWeight();
+        }
+        return sum == 1;
     }
+
+    /**
+     * adds a student to the student list of the course
+     * adds a new null element for each assignment
+     * adds a new null element to finalScores
+     * @param student the input student
+     * @return true or false
+     */
+   public boolean registerStudents(Student student){
+       registeredStudents.add(student);
+       student.registerCourse(this);
+
+       finalScores.add(null);
+       for(Assignment assignment : assignments){
+           assignment.getScores().add(null);
+       }
+       return true;
+   }
+
+
 
     //TODO:
     // int[] calcStudentsAverage()
