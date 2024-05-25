@@ -20,7 +20,10 @@ public class Assignment {
     private int maxScore;
     private double assignmentAverage;
     private ArrayList<Integer> scores;
-    private static int nextId;
+    private static int nextId = 1;
+
+    public Assignment(String assignmentName, double weight, int maxScore) {
+    }
 
     /**
      * calculates the average score for one assignment
@@ -60,9 +63,4 @@ public class Assignment {
                 ", maxScore=" + maxScore +
                 '}';
     }
-
-    //TODO:
-    // toString
-    // generates a string to represent an assignment,
-    // with assignmentId, assignmentName, weight and maxScore
 }

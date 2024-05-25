@@ -73,7 +73,7 @@ public class Address {
             this.province = province;
             this.country = country;
         } else {
-            this.streetNo = 0; // ask about null int value
+            this.streetNo = 0;
             this.street = null;
             this.city = null;
             this.province = null;

@@ -16,7 +16,7 @@ public class Student {
     private Address address;
     private Department department;
     private ArrayList<Course> registeredCourses;
-    private static int nextId = 9;
+    private static int nextId = 1;
 
     /**
      * registers a student into a course
@@ -24,10 +24,8 @@ public class Student {
      * @return true or false
      */
     public boolean registerCourse(Course course) {
-        registeredCourses.add(course);
-        course.registeredStudents(this);
-                                        // appends null for scores of each assignment of course
-        return true;
+        course.registerStudents(this);
+        return true;                                // appends null for scores of each assignment of course
     }
 
     /**
@@ -36,9 +34,11 @@ public class Student {
      * @return true or false
      */
     public boolean dropCourse(Course course) {
+        if (!registerCourse(course)) {
+            return false;
+        }
         registeredCourses.remove(course);
-        course.registeredStudents(this);
-                                        //if the course is not registered yet, directly returns false
+        course.registerStudents(this);
 
         return true;
     }
@@ -85,20 +85,4 @@ public class Student {
                 ", registeredCourses=" + registeredCourses +
                 '}';
     }
-
-    //TODO:
-    // If the course is already registered, directly returns false
-    // if course is already registered, return false
-
-    //TODO:
-    // If the course is not registered yet, directly returns false
-
-    //TODO:
-    // This method is called in Course toString().
-
-    //TODO:
-    // toString
-    // converts a student to a string that contains the studentId, the studentName,
-    // the gender, the address and the department, and the registeredCourses
-    // (only the courseId, the courseName, and the departmentName)
 }

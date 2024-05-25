@@ -9,6 +9,7 @@ import java.util.ArrayList;
 @EqualsAndHashCode
 @Getter
 @Setter
+
 public class Course {
     private String courseId;
     private String courseName;
@@ -18,6 +19,13 @@ public class Course {
     private ArrayList<Student> registeredStudents;
     private ArrayList<Double> finalScores;
     private static int nextId = 1;
+
+    public Course(String courseId) {
+        this.courseId = courseId;
+        assignments = new ArrayList<>();
+        registeredStudents = new ArrayList<>();
+        finalScores = new ArrayList<>();
+    }
 
     /**
      * checks if the sum of weights of all assignments
@@ -41,24 +49,58 @@ public class Course {
      */
    public boolean registerStudents(Student student){
        registeredStudents.add(student);
-       student.registerCourse(this);
 
-       finalScores.add(null);
-       for(Assignment assignment : assignments){
-           assignment.getScores().add(null);
-       }
+//       registeredStudents.add(student);
+//       student.getRegisteredCourses().add(this);
+//       System.out.println(registeredStudents);
+//       finalScores.add(null);
+//       for(Assignment assignment : assignments){
+//           assignment.getScores().add(null);
+//       }
        return true;
    }
 
+   public int[] calcStudentsAverage() {
+       int[] scores = new int[registeredStudents.size()];
+       for(int i = 0; i < scores.length; i++){
+           double total = 0;
+           for(Assignment assignment : assignments){
+               total += assignment.getScores().get(i) * assignment.getWeight();
+           }
+           scores[i] = (int)total * 100;
+       }
+       return scores;
+   }
 
+   public boolean addAssignment(String assignmentName, double weight, int maxScore) {
+       Assignment assignment = new Assignment(assignmentName, weight, maxScore);
+       assignments.add(assignment);
+       return true;
+   }
+
+    /**
+     * a simplified version of toString
+     * @return a simplified string
+     */
+    public String toSimplifiedString() {
+        return courseId + " " + courseName + " " + credits + " " + department.getDepartmentName();
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseId='" + courseId + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", credits=" + credits +
+                ", department=" + department +
+                ", assignments=" + assignments +
+                ", registeredStudents=" + registeredStudents +
+                '}';
+    }
 
     //TODO:
     // int[] calcStudentsAverage()
     // calculates the weighted average score of a student.
-
-    //TODO:
-    // boolean addAssignment(String assignmentName, double weight, int maxScore)
-    // adds a new assignment to the course
 
     //TODO:
     // void generateScores()
@@ -70,15 +112,4 @@ public class Course {
     // displays the scores of a course in a table,
     // with the assignment averages and student weighted average
 
-    //TODO:
-    // String toSimplifiedString()
-    // converts a course to a simple string with only the courseId, courseName,
-    // credits, and departmentName.
-
-    //TODO:
-    // String toString()
-    // converts a course to a string that contains
-    // the courseId, the courseName, the credits, the departmentName
-    // the assignments, and the registeredStudents
-    // (only the studentId, the studentName and the departmentName)
 }
